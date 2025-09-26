@@ -3,9 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>boas pessoal</title>
+    <title>Inscrição - Webtools01</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+    <div class="container">
+        <main class="card" role="main">
+            <h1>Crie a sua conta</h1>
+            <p class="promo">Inscreva-se para aceder às funcionalidades exclusivas.</p>
+
+            <form id="signupForm" novalidate>
+                <div class="form-row">
+                    <label for="fullName">Nome completo</label>
+                    <input id="fullName" name="fullName" class="input" type="text" placeholder="Ex.: Maria Silva" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" class="input" type="email" placeholder="seu@exemplo.com" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="password">Senha</label>
+                    <input id="password" name="password" class="input" type="password" placeholder="Mínimo 8 caracteres" minlength="8" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="confirm">Confirmar senha</label>
+                    <input id="confirm" name="confirm" class="input" type="password" placeholder="Repita a senha" minlength="8" required>
+                </div>
+
+                <div class="form-row checkbox-row">
+                    <input id="newsletter" name="newsletter" type="checkbox">
+                    <label for="newsletter" class="small">Quero receber novidades por email</label>
+                </div>
+
+                <div class="form-row">
+                    <button type="submit" class="btn" id="submitBtn">Inscrever</button>
+                </div>
+
+                <div class="success" id="successMsg">Inscrição realizada com sucesso! Verifique o seu email.</div>
+                <p class="footer-note">Ao continuar, concorda com os nossos termos e política de privacidade.</p>
+            </form>
+        </main>
+    </div>
+
+    <script>
+    // Validação simples de senhas
+    (function(){
+        const form = document.getElementById('signupForm');
+        const pass = document.getElementById('password');
+        const conf = document.getElementById('confirm');
+        const success = document.getElementById('successMsg');
+
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            success.style.display = 'none';
+
+            if(pass.value !== conf.value){
+                conf.setCustomValidity('As senhas não coincidem');
+                conf.reportValidity();
+                return;
+            } else {
+                conf.setCustomValidity('');
+            }
+
+            // Simula envio e mostra mensagem de sucesso
+            document.getElementById('submitBtn').disabled = true;
+            setTimeout(()=>{
+                success.style.display = 'block';
+                document.getElementById('submitBtn').disabled = false;
+                form.reset();
+            }, 800);
+        });
+    })();
+    </script>
+
 </body>
 </html>
